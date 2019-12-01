@@ -17,14 +17,37 @@ typedef struct _queue {
 	data* head;
 	data* tail;
 }queue;
-
+/*
+Create and return an empty queue
+*/
 queue* createQueue(size_t allocSize);
-void enqueue(queue * q, void* data);//Create and return an empty queue
-void  dequeue(queue * q, void * toRet);//Delete first element and save its value to second argument
-void * front(queue*q);//Return the first element
-void clearQueue(queue* q);//Deletes each element of the queue
-void destroyQueue(queue *q);//Destroys and clears the whole queue
+/*
+Insert data into the queue(last position)
+*/
+void enqueue(queue * q, void* data);
+/*
+Remove first element of the queue of save its value to the toRet argument
+*/
+void  dequeue(queue * q, void * toRet);
+/*
+Save first element of the queue to the toRet argument
+*/
+void front(queue*q, void *toRet);//Return the first element
+/*
+Deletes all data of the queue
+*/
+void clearQueue(queue* q);
+/*
+Clears and destoys the queue
+*/
+void destroyQueue(queue *q);
+/*
+Return size of the queue
+*/
 size_t getSize(queue *q);
+/*
+Check is queue is empty
+*/
 bool isEmpty(queue * q);
 
 
