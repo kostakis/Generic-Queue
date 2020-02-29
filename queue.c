@@ -28,7 +28,7 @@ void enqueue(queue *q, void *_data)
 		fprintf(stderr, "Error allocating memory");
 		exit(-1);
 	}
-	toInsert->data = malloc(sizeof(q->allocationSize));
+	toInsert->data = malloc(q->allocationSize);
 	if (toInsert->data == NULL)
 	{
 		fprintf(stderr, "Error allocating memory");
