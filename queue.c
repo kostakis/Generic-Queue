@@ -6,6 +6,7 @@ queue *createQueue(size_t allocSize)
 	queue *q = (queue *)malloc(sizeof(queue));
 	if (q == NULL)
 	{
+		fprintf(stderr, "Malloc failed when creating queue object\n");
 		return NULL;
 	}
 	q->allocationSize = allocSize;
@@ -19,7 +20,7 @@ void enqueue(queue *q, void *_data)
 	if (q == NULL)
 	{
 		fprintf(stderr, "Queue can't be null");
-		exit(-1);
+		return;
 	}
 
 	data *toInsert = (data *)malloc(sizeof(data));
@@ -51,9 +52,9 @@ void enqueue(queue *q, void *_data)
 
 void dequeue(queue *q, void *toRet)
 {
-	if (q == NULL || isEmpty(q))
+	if (q == NULL)
 	{
-		fprintf(stderr, "Queue is null or empty");
+		fprintf(stderr, "Queue can't be null\n");
 		exit(-1);
 	}
 
@@ -118,8 +119,11 @@ bool isEmpty(queue *q)
 {
 	if (q == NULL)
 	{
+		fprintf(stderr, "Queue can't be null");
+		exit(-1);
 		return NULL;
 	}
+	
 	if (q->size == 0)
 	{
 		return true;
