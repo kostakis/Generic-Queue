@@ -3,33 +3,38 @@
 #include <stdio.h>
 #include <string.h>
 
-struct temp {
+typedef struct Foo {
 	int a;
 	int b;
 	int c;
-};
+}Foo;
 
 int main() {
-	queue* q = createQueue(sizeof(struct temp));
-	struct temp t;
-	t.a = 10;
-	enqueue(q, &t);
+	queue* q = createQueue(sizeof(Foo));
+	Foo f;
+	f.a = 100;
+	f.b = 100;
+	f.c = 100;
 
-	struct temp test;
-	front(q,&test);
-	printf("Front of the Q is %d\n",test.a);
+	enqueue(q, &f);
+	printf("Enqeued %d\n", f.a);
+	
+	Foo frontElem;
+	front(q, &frontElem);
+	printf("Front element of queue is %d\n",frontElem.a);
 
-	for (int i = 0; i < 10; i++) {
-		struct temp a; 
-		a.c = i+10;
-		a.b = 0;
-		a.a = 0;
-		enqueue(q, &a);
+	for (int i = 0; i < 3; i++) {
+		Foo f1; 
+		f1.c = i+10;
+		f1.b = 0;
+		f1.a = 0;
+		enqueue(q, &f1);
+		printf("Enqueued %d\n", f1.c);
 	}
 	printf("Size of queue is %ld\n",getSize(q));
 	
 	while (!isEmpty(q)) {
-		struct temp temp;
+		Foo temp;
 		dequeue(q, &temp);
 		printf("Dequeued %d\n",temp.c);
 	}
