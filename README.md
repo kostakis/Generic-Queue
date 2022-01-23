@@ -3,6 +3,15 @@
 A simple C implementation of a generic queue data structure.
 Provides all the basics methods of a queue.
 
+# Supported Operations
+
+* enqueue
+* dequeue
+* front
+* getSize
+* clearQueue
+
+
 # Basic Usage
 
 ```C
