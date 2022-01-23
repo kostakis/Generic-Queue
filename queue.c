@@ -1,9 +1,9 @@
 #include "queue.h"
 #include <string.h>
 
-queue *createQueue(size_t allocSize)
+queue* createQueue(size_t allocSize)
 {
-	queue *q = (queue *)malloc(sizeof(queue));
+	queue* q = (queue*)malloc(sizeof(queue));
 	if (q == NULL)
 	{
 		fprintf(stderr, "Malloc failed when creating queue object\n");
@@ -15,7 +15,7 @@ queue *createQueue(size_t allocSize)
 	return q;
 }
 
-void enqueue(queue *q, void *_data)
+void enqueue(queue* q, void* _data)
 {
 	if (q == NULL)
 	{
@@ -23,7 +23,7 @@ void enqueue(queue *q, void *_data)
 		return;
 	}
 
-	data *toInsert = (data *)malloc(sizeof(data));
+	data* toInsert = (data*)malloc(sizeof(data));
 	if (toInsert == NULL)
 	{
 		fprintf(stderr, "Error allocating memory");
@@ -50,7 +50,7 @@ void enqueue(queue *q, void *_data)
 	q->size++;
 }
 
-void dequeue(queue *q, void *toRet)
+void dequeue(queue* q, void* toRet)
 {
 	if (q == NULL)
 	{
@@ -58,7 +58,7 @@ void dequeue(queue *q, void *toRet)
 		exit(-1);
 	}
 
-	data *toDel = q->head;
+	data* toDel = q->head;
 	if (q->size == 1)
 	{
 		memcpy(toRet, toDel->data, q->allocationSize);
@@ -75,7 +75,7 @@ void dequeue(queue *q, void *toRet)
 	q->size--;
 }
 
-void front(queue*q, void *toRet)
+void front(queue* q, void* toRet)
 {
 	if (q == NULL)
 	{
@@ -86,7 +86,7 @@ void front(queue*q, void *toRet)
 	memcpy(toRet, q->head->data, q->allocationSize);
 }
 
-void clearQueue(queue *q)
+void clearQueue(queue* q)
 {
 	if (q == NULL)
 	{
@@ -96,7 +96,7 @@ void clearQueue(queue *q)
 
 	while (!isEmpty(q))
 	{
-		data *temp = q->head;
+		data* temp = q->head;
 		q->head = q->head->next;
 		free(temp->data);
 		free(temp);
@@ -104,7 +104,7 @@ void clearQueue(queue *q)
 	}
 }
 
-size_t getSize(queue *q)
+size_t getSize(queue* q)
 {
 	if (q == NULL)
 	{
@@ -115,7 +115,7 @@ size_t getSize(queue *q)
 	return q->size;
 }
 
-bool isEmpty(queue *q)
+bool isEmpty(queue* q)
 {
 	if (q == NULL)
 	{
@@ -123,7 +123,7 @@ bool isEmpty(queue *q)
 		exit(-1);
 		return NULL;
 	}
-	
+
 	if (q->size == 0)
 	{
 		return true;
@@ -134,7 +134,7 @@ bool isEmpty(queue *q)
 	}
 }
 
-void destroyQueue(queue *q)
+void destroyQueue(queue* q)
 {
 	clearQueue(q);
 	free(q);

@@ -44,14 +44,14 @@ void front(queue* q, void* toRet);
 
 /**
  * @brief Delete all the elements of the queue
- * 
+ *
  * @param q The queue
  */
 void clearQueue(queue* q);
 
 /**
  * @brief Destroy the queue
- * 
+ *
  * @param q The queue
  */
 void destroyQueue(queue* q);
@@ -64,7 +64,7 @@ size_t getSize(queue* q);
 
 /**
  * @brief Check if queue is empty
- * 
+ *
  * @param q The queue
  * @return true if size >= 1, false otherwise
  */

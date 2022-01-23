@@ -18,25 +18,25 @@ int main() {
 
 	enqueue(q, &f);
 	printf("Enqeued %d\n", f.a);
-	
+
 	Foo frontElem;
 	front(q, &frontElem);
-	printf("Front element of queue is %d\n",frontElem.a);
+	printf("Front element of queue is %d\n", frontElem.a);
 
 	for (int i = 0; i < 3; i++) {
-		Foo f1; 
-		f1.c = i+10;
+		Foo f1;
+		f1.c = i + 10;
 		f1.b = 0;
 		f1.a = 0;
 		enqueue(q, &f1);
 		printf("Enqueued %d\n", f1.c);
 	}
-	printf("Size of queue is %ld\n",getSize(q));
-	
+	printf("Size of queue is %ld\n", getSize(q));
+
 	while (!isEmpty(q)) {
 		Foo temp;
 		dequeue(q, &temp);
-		printf("Dequeued %d\n",temp.c);
+		printf("Dequeued %d\n", temp.c);
 	}
 	clearQueue(q);
 	printf("Cleared queue\n");
