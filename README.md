@@ -34,11 +34,29 @@ destroyQueue(q);
 
 ```
 
-# Example
-
-At main.c there is an example to demonstrate the basic usage of queue.
+# Bulding
+## Linux
+### Run Example
 
 ```bash
-make all
-./test.out
+cmake -S . -B bin/
+cd bin;
+make example
+./example
 ```
+
+### Unit Tests
+
+```bash
+cmake -S . -B bin/
+cd bin;
+make all
+ctest
+```
+
+## Windows
+```
+cmake -S . -B bin/
+cd bin;
+```
+Open the solution file with Visual Studio.
