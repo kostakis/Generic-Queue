@@ -19,39 +19,41 @@ typedef struct _queue {
 
 /**
  * @param allocSize Size of elements insrted
- * @return queue object
+ * @return queue on success, NULL on error
  */
 queue* createQueue(size_t allocSize);
 
 /**
  * @param q The queue
  * @param data Data to be inserted
+ * @return queue on success, NULL on error
  */
-void enqueue(queue* q, void* data);
+queue* enqueue(queue* q, void* data);
 
 /**
  * @param q The queue
  * @param deletedElem The element deleted
+ * @return queue on success, NULL on error
  */
-void dequeue(queue* q, void* toRet);
+queue* dequeue(queue* q, void* toRet);
 
 /**
  * @brief Get the front element
  * @param q The queue
  * @param toRet The first element
+ * @return queue on success, NULL on error
  */
-void front(queue* q, void* toRet);
+queue* front(queue* q, void* toRet);
 
 /**
  * @brief Delete all the elements of the queue
- *
  * @param q The queue
+ * @return queue on success, NULL on error
  */
-void clearQueue(queue* q);
+queue* clearQueue(queue* q);
 
 /**
  * @brief Destroy the queue
- *
  * @param q The queue
  */
 void destroyQueue(queue* q);
@@ -66,7 +68,7 @@ size_t getSize(queue* q);
  * @brief Check if queue is empty
  *
  * @param q The queue
- * @return true if size >= 1, false otherwise
+ * @return true if size >= 1, false otherwise,
  */
 bool isEmpty(queue* q);
 
