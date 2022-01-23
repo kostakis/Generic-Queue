@@ -1,13 +1,21 @@
 #include "queue.h"
 #include <string.h>
 
+static void checkNullQueue(queue* q) {
+	if (q == NULL)
+	{
+		fprintf(stderr, "Queue can't be null");
+		exit(EXIT_FAILURE);
+	}
+}
+
 queue* createQueue(size_t allocSize)
 {
 	queue* q = (queue*)malloc(sizeof(queue));
 	if (q == NULL)
 	{
 		fprintf(stderr, "Malloc failed when creating queue object\n");
-		return NULL;
+		exit(EXIT_FAILURE);
 	}
 	q->allocationSize = allocSize;
 	q->size = 0;
@@ -17,23 +25,18 @@ queue* createQueue(size_t allocSize)
 
 void enqueue(queue* q, void* _data)
 {
-	if (q == NULL)
-	{
-		fprintf(stderr, "Queue can't be null");
-		return;
-	}
-
+	checkNullQueue(q);
 	data* toInsert = (data*)malloc(sizeof(data));
 	if (toInsert == NULL)
 	{
 		fprintf(stderr, "Error allocating memory");
-		exit(-1);
+		return;
 	}
 	toInsert->data = malloc(q->allocationSize);
 	if (toInsert->data == NULL)
 	{
 		fprintf(stderr, "Error allocating memory");
-		exit(-1);
+		return;
 	}
 	toInsert->next = NULL;
 	memcpy(toInsert->data, _data, q->allocationSize);
@@ -52,11 +55,7 @@ void enqueue(queue* q, void* _data)
 
 void dequeue(queue* q, void* toRet)
 {
-	if (q == NULL)
-	{
-		fprintf(stderr, "Queue can't be null\n");
-		exit(-1);
-	}
+	checkNullQueue(q);
 
 	data* toDel = q->head;
 	if (q->size == 1)
@@ -77,22 +76,14 @@ void dequeue(queue* q, void* toRet)
 
 void front(queue* q, void* toRet)
 {
-	if (q == NULL)
-	{
-		fprintf(stderr, "Queue can't be null");
-		exit(-1);
-	}
+	checkNullQueue(q);
 
 	memcpy(toRet, q->head->data, q->allocationSize);
 }
 
 void clearQueue(queue* q)
 {
-	if (q == NULL)
-	{
-		fprintf(stderr, "Queue can't be null");
-		exit(-1);
-	}
+	checkNullQueue(q);
 
 	while (!isEmpty(q))
 	{
@@ -106,32 +97,16 @@ void clearQueue(queue* q)
 
 size_t getSize(queue* q)
 {
-	if (q == NULL)
-	{
-		fprintf(stderr, "Queue can't be null");
-		exit(-1);
-	}
+	checkNullQueue(q);
 
 	return q->size;
 }
 
 bool isEmpty(queue* q)
 {
-	if (q == NULL)
-	{
-		fprintf(stderr, "Queue can't be null");
-		exit(-1);
-		return NULL;
-	}
+	checkNullQueue(q);
 
-	if (q->size == 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return q->size == 0 ? true : false;
 }
 
 void destroyQueue(queue* q)
