@@ -1,5 +1,4 @@
 *.out
 *.o
 bin/
-external
 .vscode/
