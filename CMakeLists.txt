@@ -19,3 +19,4 @@ add_executable(example main.c)
 target_link_libraries(example genericQueue)
 
 add_subdirectory(tests)
+

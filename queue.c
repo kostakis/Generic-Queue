@@ -91,6 +91,19 @@ queue* front(queue* q, void* toRet)
 	return q;
 }
 
+queue* reverse(queue* q)
+{
+	if (q == NULL) return NULL;
+	if (getSize(q) == 0) return;
+	else {
+		data temp;
+		dequeue(q, &temp);
+		reverse(q);
+		enqueue(q, &temp);
+		return q;
+	}
+}
+
 queue* clearQueue(queue* q)
 {
 	if (q == NULL)

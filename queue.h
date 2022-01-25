@@ -50,6 +50,13 @@ extern "C" {
 	queue* front(queue* q, void* toRet);
 
 	/**
+	* @brieft Reverse the queue
+	* @param The queue
+	* @return q, NULL on error
+	*/
+	queue* reverse(queue* q);
+
+	/**
 	 * @brief Delete all the elements of the queue
 	 * @param q The queue
 	 * @return queue on success, NULL on error

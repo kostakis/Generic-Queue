@@ -44,6 +44,8 @@ int main() {
 	}
 	printf("Size of queue is %ld\n", getSize(q));
 
+	reverse(q);
+
 	while (!isEmpty(q)) {
 		Foo temp;
 		//No error checking

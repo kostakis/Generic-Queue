@@ -8,6 +8,7 @@ Provides all the basics methods of a queue.
 * enqueue
 * dequeue
 * front
+* reverse
 * getSize
 * clearQueue
 
