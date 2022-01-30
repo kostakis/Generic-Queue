@@ -35,6 +35,8 @@ destroyQueue(q);
 
 ```
 
+See ```main.c``` for a complete example.
+
 # Bulding
 ## Linux
 ### Run Example
