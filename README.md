@@ -30,7 +30,7 @@ enqueue(q, &f);
 Foo temp;
 dequeue(q, &temp);
 
-destroyQueue(q);
+destroyQueue(&q);
 /*..........*/
 
 ```
@@ -49,6 +49,8 @@ make example
 ```
 
 ### Unit Tests
+
+Also have created some basic unit tests using gtest and C++.
 
 ```bash
 cmake -S . -B bin/
