@@ -46,6 +46,7 @@ int main() {
 	}
 	printf("Size of queue is %zd\n", getSize(q));
 
+	printf("Reserving queue\n");
 	reverse(q);
 
 	while (!isEmpty(q)) {

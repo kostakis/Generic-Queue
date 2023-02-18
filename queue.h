@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <stdbool.h> //For true
 
 #ifdef __cplusplus
 extern "C" {
@@ -65,7 +65,7 @@ extern "C" {
 
 	/**
 	 * @brief Destroy the queue
-	 * @param q The queue
+	 * @param q A to the queue
 	 */
 	void destroyQueue(queue** q);
 
