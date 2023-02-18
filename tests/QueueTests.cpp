@@ -9,7 +9,7 @@ protected:
 	}
 
 	void TearDown() override {
-		destroyQueue(q);
+		destroyQueue(&q);
 	}
 
 	void checkSize(int expected) {
