@@ -9,9 +9,12 @@ set(CMAKE_SUPPRESS_REGENERATION true)
 set(qLibSrcFiles
     queue.c)
 
+set(qLibHeaderFiles
+    queue.h)
+
 add_library(genericQueue
             STATIC
-            ${qLibSrcFiles})
+            ${qLibSrcFiles} ${qLibHeaderFiles})
 
 target_include_directories(genericQueue PRIVATE .)
 

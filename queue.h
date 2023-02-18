@@ -67,7 +67,7 @@ extern "C" {
 	 * @brief Destroy the queue
 	 * @param q The queue
 	 */
-	void destroyQueue(queue* q);
+	void destroyQueue(queue** q);
 
 	/**
 	 * @param q The queue

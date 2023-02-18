@@ -1,7 +1,7 @@
 #include "queue.h"
+
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 
 typedef struct Foo {
 	int a;
@@ -9,12 +9,14 @@ typedef struct Foo {
 	int c;
 }Foo;
 
+//Driver code to test the generic queue library
 int main() {
 	queue* q = createQueue(sizeof(Foo));
 	if (q == NULL) {
 		fprintf(stderr, "Cant create queue\n");
 		return -1;
 	}
+
 	Foo f;
 	f.a = 100;
 	f.b = 100;
@@ -38,11 +40,11 @@ int main() {
 		f1.c = i + 10;
 		f1.b = 0;
 		f1.a = 0;
-		//No error checking
-		enqueue(q, &f1);
-		printf("Enqueued %d\n", f1.c);
+		//Even after f1 goes out of scope we make a copy so it does not matter
+		enqueue(q, &f1); //No error checking
+		printf("Enqueued %d\n", f1.c); //Showing only one number of the struct for simplicity reasons
 	}
-	printf("Size of queue is %ld\n", getSize(q));
+	printf("Size of queue is %zd\n", getSize(q));
 
 	reverse(q);
 
@@ -58,7 +60,7 @@ int main() {
 		return -1;
 	}
 	printf("Cleared queue\n");
-	destroyQueue(q);
+	destroyQueue(&q);
 	printf("Destroyed queue\n");
 
 	return 0;

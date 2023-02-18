@@ -22,20 +22,24 @@ queue* enqueue(queue* q, void* _data)
 		//fprintf(stderr, "Queue can't be null");
 		return NULL;
 	}
+
 	data* toInsert = (data*)malloc(sizeof(data));
 	if (toInsert == NULL)
 	{
 		//fprintf(stderr, "Error allocating memory");
 		return NULL;
 	}
+	
 	toInsert->data = malloc(q->allocationSize);
 	if (toInsert->data == NULL)
 	{
 		//fprintf(stderr, "Error allocating memory");
 		return NULL;;
 	}
+	
 	toInsert->next = NULL;
 	memcpy(toInsert->data, _data, q->allocationSize);
+	
 	if (q->size == 0)
 	{ //First insertion
 		q->head = q->tail = toInsert;
@@ -94,7 +98,7 @@ queue* front(queue* q, void* toRet)
 queue* reverse(queue* q)
 {
 	if (q == NULL) return NULL;
-	if (getSize(q) == 0) return;
+	if (getSize(q) == 0) return q; //Nonthing to reserve
 	else {
 		data temp;
 		dequeue(q, &temp);
@@ -134,8 +138,9 @@ bool isEmpty(queue* q)
 	return q->size == 0 ? true : false;
 }
 
-void destroyQueue(queue* q)
+void destroyQueue(queue** q)
 {
-	clearQueue(q);
-	free(q);
+	clearQueue(*q);
+	free(*q);
+	*q = NULL;
 }
