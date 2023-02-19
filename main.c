@@ -55,11 +55,13 @@ int main() {
 		dequeue(q, &temp);
 		printf("Dequeued %d\n", temp.c);
 	}
+
 	if (clearQueue(q) == NULL) {
 		//No error checking
 		fprintf(stderr, "Cant clear queue\n");
 		return -1;
 	}
+
 	printf("Cleared queue\n");
 	destroyQueue(&q);
 	printf("Destroyed queue\n");

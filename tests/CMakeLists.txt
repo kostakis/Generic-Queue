@@ -21,10 +21,10 @@ target_link_libraries(
 gtest_discover_tests(QueueTest)
 
 #Run unit tests after build
-#add_custom_command(
-#     TARGET QueueTest
-#     COMMENT "Run tests"
-#     POST_BUILD 
-#     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-#     COMMAND ${CMAKE_CTEST_COMMAND}
-#)
+add_custom_command(
+     TARGET QueueTest
+     COMMENT "Run tests"
+     POST_BUILD 
+     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+     COMMAND ${CMAKE_CTEST_COMMAND}
+)

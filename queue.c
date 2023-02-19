@@ -1,11 +1,9 @@
 #include "queue.h"
 #include <string.h>
 
-queue* createQueue(size_t allocSize)
-{
+queue* createQueue(size_t allocSize) {
 	queue* q = (queue*)malloc(sizeof(queue));
-	if (q == NULL)
-	{
+	if (q == NULL) {
 		//fprintf(stderr, "Malloc failed when creating queue object\n");
 		return NULL;
 	}
@@ -15,37 +13,30 @@ queue* createQueue(size_t allocSize)
 	return q;
 }
 
-queue* enqueue(queue* q, void* _data)
-{
-	if (q == NULL)
-	{
+queue* enqueue(queue* q, void* _data) {
+	if (q == NULL) {
 		//fprintf(stderr, "Queue can't be null");
 		return NULL;
 	}
 
 	data* toInsert = (data*)malloc(sizeof(data));
-	if (toInsert == NULL)
-	{
+	if (toInsert == NULL) {
 		//fprintf(stderr, "Error allocating memory");
 		return NULL;
 	}
-	
+
 	toInsert->data = malloc(q->allocationSize);
-	if (toInsert->data == NULL)
-	{
+	if (toInsert->data == NULL) {
 		//fprintf(stderr, "Error allocating memory");
 		return NULL;;
 	}
-	
+
 	toInsert->next = NULL;
 	memcpy(toInsert->data, _data, q->allocationSize);
-	
-	if (q->size == 0)
-	{ //First insertion
+
+	if (q->size == 0) { //First insertion
 		q->head = q->tail = toInsert;
-	}
-	else
-	{
+	} else {
 		q->tail->next = toInsert;
 		q->tail = toInsert;
 	}
@@ -55,17 +46,14 @@ queue* enqueue(queue* q, void* _data)
 	return q;
 }
 
-queue* dequeue(queue* q, void* toRet)
-{
-	if (q == NULL)
-	{
+queue* dequeue(queue* q, void* toRet) {
+	if (q == NULL) {
 		//fprintf(stderr, "Queue can't be null");
 		return NULL;
 	}
 
 	data* toDel = q->head;
-	if (q->size == 1)
-	{
+	if (q->size == 1) {
 		memcpy(toRet, toDel->data, q->allocationSize);
 		free(toDel->data);
 		free(toDel);
@@ -82,10 +70,8 @@ queue* dequeue(queue* q, void* toRet)
 	return q;
 }
 
-queue* front(queue* q, void* toRet)
-{
-	if (q == NULL)
-	{
+queue* front(queue* q, void* toRet) {
+	if (q == NULL) {
 		//fprintf(stderr, "Queue can't be null");
 		return NULL;
 	}
@@ -95,8 +81,7 @@ queue* front(queue* q, void* toRet)
 	return q;
 }
 
-queue* reverse(queue* q)
-{
+queue* reverse(queue* q) {
 	if (q == NULL) return NULL;
 	if (getSize(q) == 0) return q; //Nonthing to reserve
 	else {
@@ -108,16 +93,13 @@ queue* reverse(queue* q)
 	}
 }
 
-queue* clearQueue(queue* q)
-{
-	if (q == NULL)
-	{
+queue* clearQueue(queue* q) {
+	if (q == NULL) {
 		//fprintf(stderr, "Queue can't be null");
 		return NULL;
 	}
 
-	while (!isEmpty(q))
-	{
+	while (!isEmpty(q)) {
 		data* temp = q->head;
 		q->head = q->head->next;
 		free(temp->data);
@@ -128,18 +110,15 @@ queue* clearQueue(queue* q)
 	return q;
 }
 
-size_t getSize(queue* q)
-{
+size_t getSize(queue* q) {
 	return q->size;
 }
 
-bool isEmpty(queue* q)
-{
+bool isEmpty(queue* q) {
 	return q->size == 0 ? true : false;
 }
 
-void destroyQueue(queue** q)
-{
+void destroyQueue(queue** q) {
 	clearQueue(*q);
 	free(*q);
 	*q = NULL;

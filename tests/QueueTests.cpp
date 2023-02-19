@@ -6,10 +6,12 @@ class QueueTest : public ::testing::Test {
 protected:
 	void SetUp() override {
 		q = createQueue(sizeof(int));
+		ASSERT_TRUE( NULL != q);
 	}
 
 	void TearDown() override {
 		destroyQueue(&q);
+		EXPECT_EQ(NULL, q);
 	}
 
 	void checkSize(int expected) {
@@ -18,8 +20,6 @@ protected:
 
 	queue* q;
 };
-
-TEST_F(QueueTest, Creation) { ASSERT_TRUE(q != NULL); }
 
 TEST_F(QueueTest, Enqueue) {
 	int prevSize = getSize(q);

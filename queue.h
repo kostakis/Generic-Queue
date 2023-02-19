@@ -87,4 +87,4 @@ extern "C" {
 }
 #endif
 
-#endif
+#endif // QUEUE_H
