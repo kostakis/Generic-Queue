@@ -2,24 +2,19 @@ cmake_minimum_required(VERSION 3.16.0)
 
 project(GenericQueue)
 
-enable_testing()
 add_subdirectory(external)
+
+# For google test
 set(CMAKE_SUPPRESS_REGENERATION true)
 
-set(qLibSrcFiles
-    queue.c)
+file(GLOB_RECURSE Queue_Header "include/*.h")
+file(GLOB_RECURSE Queue_Src "src/*.c")
 
-set(qLibHeaderFiles
-    queue.h)
+add_library(genericQueue STATIC ${Queue_Header} ${Queue_Src})
+target_include_directories(genericQueue PUBLIC "include/")
 
-add_library(genericQueue
-            STATIC
-            ${qLibSrcFiles} ${qLibHeaderFiles})
-
-target_include_directories(genericQueue PRIVATE .)
-
-add_executable(example main.c)
+add_executable(example "main.c")
 target_link_libraries(example genericQueue)
 
+enable_testing()
 add_subdirectory(tests)
-

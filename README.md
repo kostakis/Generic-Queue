@@ -2,6 +2,7 @@
 
 A simple C implementation of a generic queue data structure.
 Provides all the basics methods of a queue.
+It can be used as a static library  
 
 # Supported Operations
 
@@ -42,26 +43,33 @@ See ```main.c``` for a complete example.
 ### Run Example
 
 ```bash
-cmake -S . -B bin/
-cd bin;
+cmake -S . -B build/
+cd build;
 make example
 ./example
 ```
+  
+You can also run ```make genericQueue``` to build just the library
 
 ### Unit Tests
 
 Also have created some basic unit tests using gtest and C++.
 
 ```bash
-cmake -S . -B bin/
-cd bin;
-make all
+cmake -S . -B build/
+cd build;
+make all # This also compiles and executes the unit tests
 ctest
 ```
 
 ## Windows
+```bash
+cmake -S . -B build/
+cd build;
+cmake --build .
+ctest # To run the tests
 ```
-cmake -S . -B bin/
-cd bin;
-```
-Open the solution file with Visual Studio.
+
+In the Debug/ folder the example is located together with the static library.    
+
+You can also open the solution file with visual studio.
