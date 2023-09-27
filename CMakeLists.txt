@@ -14,7 +14,7 @@ add_library(genericQueue STATIC ${Queue_Header} ${Queue_Src})
 target_include_directories(genericQueue PUBLIC "include/")
 
 add_executable(example "main.c")
-target_link_libraries(example genericQueue)
+target_link_libraries(example PRIVATE genericQueue)
 
 enable_testing()
 add_subdirectory(tests)

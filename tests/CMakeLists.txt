@@ -11,20 +11,15 @@ add_executable(
 )
 
 target_include_directories(QueueTest PUBLIC ${CMAKE_SOURCE_DIR})
-
-target_link_libraries(
-  QueueTest
-  gtest_main
-  genericQueue
-)
+target_link_libraries(QueueTest PRIVATE gtest_main genericQueue)
 
 gtest_discover_tests(QueueTest)
 
 #Run unit tests after build
-add_custom_command(
-     TARGET QueueTest
-     COMMENT "Run tests"
-     POST_BUILD 
-     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-     COMMAND ${CMAKE_CTEST_COMMAND}
-)
+# add_custom_command(
+#      TARGET QueueTest
+#      COMMENT "Run tests"
+#      POST_BUILD 
+#      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+#      COMMAND ${CMAKE_CTEST_COMMAND}
+# )
