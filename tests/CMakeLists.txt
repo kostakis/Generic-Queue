@@ -10,7 +10,7 @@ add_executable(
   DestroyQueueTests.cpp
 )
 
-target_include_directories(QueueTest PUBLIC ${CMAKE_SOURCE_DIR})
+target_include_directories(QueueTest PRIVATE "${CMAKE_SOURCE_DIR}/include")
 target_link_libraries(QueueTest PRIVATE gtest_main genericQueue)
 
 gtest_discover_tests(QueueTest)

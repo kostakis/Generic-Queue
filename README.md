@@ -53,7 +53,8 @@ You can also run ```make genericQueue``` to build just the library
 
 ### Unit Tests
 
-Also have created some basic unit tests using gtest and C++.
+Also have created some basic unit tests using gtest and C++.  
+Test are compiled automatically but you must run them.
 
 ```bash
 cmake -S . -B build/
