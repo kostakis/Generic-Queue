@@ -35,7 +35,10 @@ queue *enqueue(queue *q, void *_data) {
 
   toInsert->data = malloc(q->allocationSize);
   if (toInsert->data == NULL)
+  {
+    free(toInsert);
     return NULL;
+  }
 
   toInsert->next = NULL;
   memcpy(toInsert->data, _data, q->allocationSize);
