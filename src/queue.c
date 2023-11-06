@@ -96,7 +96,7 @@ queue *reverse(queue *q) {
   if (q == NULL)
     return NULL;
   if (q->size == 0)
-    return q; // Nonthing to reserve
+    return q; // Nonthing to reverse
   else {
     data temp;
     dequeue(q, &temp);

@@ -12,7 +12,7 @@ extern "C" {
 typedef struct queue queue;
 
 /**
- * @param allocSize Size of elements insrted
+ * @param allocSize Size of elements inserted
  * @return queue on success, NULL on error
  */
 queue *createQueue(size_t allocSize);
