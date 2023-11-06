@@ -2,16 +2,16 @@
 
 #include <string.h>
 
-typedef struct _data {
+typedef struct node {
   void *data;
-  struct _data *next;
-} data;
+  struct node *next;
+} node;
 
 typedef struct queue {
   size_t size;
   size_t allocationSize;
-  data *head;
-  data *tail;
+  node *head;
+  node *tail;
 } queue;
 
 queue *createQueue(size_t allocSize) {
@@ -25,23 +25,22 @@ queue *createQueue(size_t allocSize) {
   return q;
 }
 
-queue *enqueue(queue *q, void *_data) {
+queue *enqueue(queue *q, void *data) {
   if (q == NULL)
     return NULL;
 
-  data *toInsert = (data *)malloc(sizeof(data));
+  node *toInsert = (node *)malloc(sizeof(node));
   if (toInsert == NULL)
     return NULL;
 
   toInsert->data = malloc(q->allocationSize);
-  if (toInsert->data == NULL)
-  {
+  if (toInsert->data == NULL) {
     free(toInsert);
     return NULL;
   }
 
   toInsert->next = NULL;
-  memcpy(toInsert->data, _data, q->allocationSize);
+  memcpy(toInsert->data, data, q->allocationSize);
 
   if (q->size == 0) { // First insertion
     q->head = q->tail = toInsert;
@@ -55,15 +54,15 @@ queue *enqueue(queue *q, void *_data) {
   return q;
 }
 
-queue *dequeue(queue *q, void *toRet) {
+queue *dequeue(queue *q, void *data) {
   if (q == NULL)
     return NULL;
   if (q->size == 0)
     return NULL;
 
-  data *toDel = q->head;
+  node *toDel = q->head;
   if (q->size == 1) {
-    memcpy(toRet, toDel->data, q->allocationSize);
+    memcpy(data, toDel->data, q->allocationSize);
     free(toDel->data);
     free(toDel);
     q->head = q->tail = NULL;
@@ -72,7 +71,7 @@ queue *dequeue(queue *q, void *toRet) {
   }
 
   q->head = q->head->next;
-  memcpy(toRet, toDel->data, q->allocationSize);
+  memcpy(data, toDel->data, q->allocationSize);
   free(toDel->data);
   free(toDel);
   q->size--;
@@ -80,14 +79,14 @@ queue *dequeue(queue *q, void *toRet) {
   return q;
 }
 
-queue *front(queue *q, void *toRet) {
+queue *front(queue *q, void *data) {
   if (q == NULL)
     return NULL;
 
   if (q->size == 0)
     return NULL;
 
-  memcpy(toRet, q->head->data, q->allocationSize);
+  memcpy(data, q->head->data, q->allocationSize);
 
   return q;
 }
@@ -98,10 +97,13 @@ queue *reverse(queue *q) {
   if (q->size == 0)
     return q; // Nonthing to reverse
   else {
-    data temp;
-    dequeue(q, &temp);
-    reverse(q);
-    enqueue(q, &temp);
+    void *data = malloc(q->allocationSize);
+    if (data != NULL) {
+      dequeue(q, data);
+      reverse(q);
+      enqueue(q, data);
+      free(data);
+    }
     return q;
   }
 }
@@ -111,7 +113,7 @@ queue *clearQueue(queue *q) {
     return NULL;
 
   while (!isEmpty(q)) {
-    data *temp = q->head;
+    node *temp = q->head;
     q->head = q->head->next;
     free(temp->data);
     free(temp);
@@ -121,9 +123,20 @@ queue *clearQueue(queue *q) {
   return q;
 }
 
-size_t getSize(queue *q) { return q->size; }
+size_t getSize(queue *q) {
+  if (q == NULL)
+    return 0;
+  return q->size;
+}
 
 bool isEmpty(queue *q) { return q->size == 0 ? true : false; }
+
+size_t getAllocationSize(queue *q) {
+  if (q == NULL)
+    return 0;
+
+  return q->allocationSize;
+}
 
 void destroyQueue(queue **q) {
   clearQueue(*q);
