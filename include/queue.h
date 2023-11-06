@@ -29,15 +29,15 @@ queue *enqueue(queue *q, void *data);
  * @param deletedElem The element deleted
  * @return queue on success, NULL on error
  */
-queue *dequeue(queue *q, void *toRet);
+queue *dequeue(queue *q, void *data);
 
 /**
  * @brief Get the front element
  * @param q The queue
- * @param toRet The first element
+ * @param data The first element
  * @return queue on success, NULL on error
  */
-queue *front(queue *q, void *toRet);
+queue *front(queue *q, void *data);
 
 /**
  * @brieft Reverse the queue
@@ -61,7 +61,7 @@ void destroyQueue(queue **q);
 
 /**
  * @param q The queue
- * @return size_t Size of queue
+ * @return size_t Size of queue, if queue is NULL 0 is returned.
  */
 size_t getSize(queue *q);
 
@@ -72,6 +72,14 @@ size_t getSize(queue *q);
  * @return true if size >= 1, false otherwise,
  */
 bool isEmpty(queue *q);
+
+/**
+ * @brief Get the current allocation size that queue uses internally
+ *
+ * @param q The queue
+ * @return allocation size, 0 if queue is NULL
+ */
+size_t getAllocationSize(queue *q);
 
 #ifdef __cplusplus
 }
