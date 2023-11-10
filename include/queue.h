@@ -55,7 +55,8 @@ queue *clearQueue(queue *q);
 
 /**
  * @brief Destroy the queue
- * @param q A to the queue
+ * This will clear, destroy and free all memory of the queue. 
+ * @param q Pointer to the queue
  */
 void destroyQueue(queue **q);
 

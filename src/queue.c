@@ -139,6 +139,8 @@ size_t getAllocationSize(queue *q) {
 }
 
 void destroyQueue(queue **q) {
+  if (q == NULL)
+    return;
   clearQueue(*q);
   free(*q);
   *q = NULL;
