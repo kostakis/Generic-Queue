@@ -8,6 +8,7 @@ add_executable(
   QueueTest
   QueueTests.cpp
   DestroyQueueTests.cpp
+  QueueCustomStructTest.cpp
 )
 
 target_include_directories(QueueTest PRIVATE "${CMAKE_SOURCE_DIR}/include")

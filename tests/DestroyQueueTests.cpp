@@ -4,9 +4,12 @@
 
 class DestroyQueueTest : public ::testing::Test {
 protected:
-  void SetUp() override { q = createQueue(sizeof(Foo)); }
+  void SetUp() override {
+    q = createQueue(sizeof(Foo));
+    ASSERT_TRUE(NULL != q);
+  }
 
-  void TearDown() override { EXPECT_EQ(NULL, q); }
+  void TearDown() override { ASSERT_EQ(NULL, q); }
 
   struct Foo {
     int a = 0;
@@ -32,4 +35,10 @@ TEST_F(DestroyQueueTest, DestroyOneElementInserted) {
   EXPECT_TRUE(enqueue(q, &foo1) != NULL);
 
   destroyQueue(&q);
+}
+
+TEST_F(DestroyQueueTest, DestroyNullQueueWorks) {
+  destroyQueue(&q);
+  ASSERT_TRUE(q == NULL);
+  EXPECT_NO_THROW(destroyQueue(&q));
 }

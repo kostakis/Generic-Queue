@@ -11,7 +11,7 @@ protected:
 
   void TearDown() override {
     destroyQueue(&q);
-    EXPECT_EQ(NULL, q);
+    ASSERT_EQ(NULL, q);
   }
 
   typedef struct Foo {
@@ -21,7 +21,7 @@ protected:
     int d{0};
   } foo;
 
-  void checkSize(int expected) { EXPECT_EQ(getSize(q), expected); }
+  void checkSize(int expected) { ASSERT_EQ(getSize(q), expected); }
 
   queue *q;
 };
@@ -112,29 +112,4 @@ TEST_F(QueueTest, Reverse) {
 TEST_F(QueueTest, Clear) {
   clearQueue(q);
   EXPECT_TRUE(getSize(q) == 0);
-}
-
-TEST_F(QueueTest, ReverseComplicated) {
-  q = createQueue(sizeof(Foo));
-
-  Foo a;
-  a.c = 1;
-
-  Foo b;
-  b.c = 2;
-
-  Foo c;
-  c.c = 3;
-
-  reverse(q);
-  int expcted = 1;
-
-  ASSERT_EQ(getAllocationSize(q), sizeof(Foo));
-
-  while (!isEmpty(q)) {
-    Foo temp;
-    dequeue(q, &temp);
-    EXPECT_EQ(temp.c, expcted++);
-    printf("Dequeued %d\n", temp.c);
-  }
 }
