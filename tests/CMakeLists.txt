@@ -4,11 +4,13 @@ set(CMAKE_CXX_STANDARD 14)
 include(GoogleTest)
 enable_testing()
 
+file(GLOB test_src_files
+     "*.cpp"
+)
+
 add_executable(
   QueueTest
-  QueueTests.cpp
-  DestroyQueueTests.cpp
-  QueueCustomStructTest.cpp
+  ${test_src_files}
 )
 
 target_include_directories(QueueTest PRIVATE "${CMAKE_SOURCE_DIR}/include")
