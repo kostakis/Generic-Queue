@@ -2,16 +2,22 @@
 
 #include <gtest/gtest.h>
 
-class DestroyQueueTest : public ::testing::Test {
+class DestroyQueueTest : public ::testing::Test
+{
 protected:
-  void SetUp() override {
+  void SetUp() override
+  {
     q = createQueue(sizeof(Foo));
     ASSERT_TRUE(NULL != q);
   }
 
-  void TearDown() override { ASSERT_EQ(NULL, q); }
+  void TearDown() override
+  {
+    ASSERT_EQ(NULL, q);
+  }
 
-  struct Foo {
+  struct Foo
+  {
     int a = 0;
     int b = 0;
   };
@@ -19,7 +25,8 @@ protected:
   queue *q;
 };
 
-TEST_F(DestroyQueueTest, DestroyTwoElementsInserted) {
+TEST_F(DestroyQueueTest, DestroyTwoElementsInserted)
+{
   Foo foo1;
   Foo foo2;
 
@@ -29,7 +36,8 @@ TEST_F(DestroyQueueTest, DestroyTwoElementsInserted) {
   destroyQueue(&q);
 }
 
-TEST_F(DestroyQueueTest, DestroyOneElementInserted) {
+TEST_F(DestroyQueueTest, DestroyOneElementInserted)
+{
   Foo foo1;
 
   EXPECT_TRUE(enqueue(q, &foo1) != NULL);
@@ -37,7 +45,8 @@ TEST_F(DestroyQueueTest, DestroyOneElementInserted) {
   destroyQueue(&q);
 }
 
-TEST_F(DestroyQueueTest, DestroyNullQueueWorks) {
+TEST_F(DestroyQueueTest, DestroyNullQueueWorks)
+{
   destroyQueue(&q);
   ASSERT_TRUE(q == NULL);
   EXPECT_NO_THROW(destroyQueue(&q));
