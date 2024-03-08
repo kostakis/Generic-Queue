@@ -35,7 +35,7 @@ extern "C"
   /**
    * @brief Get the front element
    * @param q The queue
-   * @param data The first element
+   * @param data Variable to save the data
    * @return queue on success, NULL on error
    */
   queue *front(queue *q, void *data);
@@ -82,6 +82,14 @@ extern "C"
    * @return allocation size, 0 if queue is NULL
    */
   size_t getAllocationSize(queue *q);
+
+  /**
+  * @brief Creates a deep copy of the queue
+  * 
+  * @param src The queue to be copied
+  * @return The new queue, NULL on error
+  */
+  queue *copyQueue(queue *src);
 
 #ifdef __cplusplus
 }
