@@ -3,3 +3,4 @@
 bin/
 .vscode/
 build/
+build-linux/
