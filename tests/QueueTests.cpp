@@ -129,3 +129,25 @@ TEST_F(QueueTest, Clear)
   clearQueue(q);
   EXPECT_TRUE(getSize(q) == 0);
 }
+
+TEST_F(QueueTest, ClearManyElements)
+{
+  void *some_data= NULL;
+
+  int firstElem = 10;
+  int secondElem = 100;
+  int thirdElem = 101;
+  int forthElem = 102;
+
+  enqueue(q, &firstElem);
+  enqueue(q, &secondElem);
+  enqueue(q, &thirdElem);
+  enqueue(q, &forthElem);
+
+  EXPECT_EQ(getSize(q), 4);
+
+  clearQueue(q);
+  EXPECT_TRUE(getSize(q) == 0);
+
+  EXPECT_TRUE(front(q, some_data) == NULL);
+}

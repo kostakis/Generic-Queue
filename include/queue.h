@@ -84,11 +84,11 @@ extern "C"
   size_t getAllocationSize(queue *q);
 
   /**
-  * @brief Creates a deep copy of the queue
-  * 
-  * @param src The queue to be copied
-  * @return The new queue, NULL on error
-  */
+   * @brief Creates a deep copy of the queue
+   *
+   * @param src The queue to be copied
+   * @return The new queue, NULL on error
+   */
   queue *copyQueue(queue *src);
 
 #ifdef __cplusplus
