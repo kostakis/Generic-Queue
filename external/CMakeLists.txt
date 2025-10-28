@@ -8,7 +8,7 @@ include(FetchContent)
 FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG        7a7231c442484be389fdf01594310349ca0e42a8
+  GIT_TAG        52eb8108c5bdec04579160ae17225d66034bd723
   BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/googleTest
 )
 
