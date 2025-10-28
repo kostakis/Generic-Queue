@@ -186,7 +186,7 @@ size_t getAllocationSize(queue *q)
 {
   if(q == NULL)
   {
-    return NULL;
+    return 0;
   }
 
   return q->allocationSize;
