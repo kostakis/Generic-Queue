@@ -53,7 +53,7 @@ queue *createQueue(size_t allocSize)
 
 queue *enqueue(queue *q, void *data)
 {
-  if(q == NULL)
+  if(q == NULL || data == NULL)
   {
     return NULL;
   }
