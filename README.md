@@ -68,7 +68,9 @@ ctest
 Debug\QueueTest.exe
 ```
 
-## Installation (Linux)
+## Installation
+
+For linux  
 
 ```bash
 mkdir build && cd build
@@ -83,10 +85,19 @@ This installs:
 
 To install to a custom location:
 ```bash
-cmake -DCMAKE_INSTALL_PREFIX=/custom/path ..
+cmake .. -DCMAKE_INSTALL_PREFIX=/custom/path
 make
 make install
 ```
+
+You can also install on windows using the cmake commands
+```bash
+mkdir build && cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=C:<YOUR_PATH>
+cmake --build . --config Release
+cmake --install . --config Release
+```  
+You need to configure then your project or cmake file to link using that location
 
 ## API
 
