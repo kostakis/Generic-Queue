@@ -223,3 +223,26 @@ TEST_F(QueueTest, FindMemWithStruct)
 
   destroyQueue(&structQueue);
 }
+
+// Predicate function for testing find
+static bool isGreaterThan15(void *data)
+{
+  int value = *(int*)data;
+  return value > 15;
+}
+
+TEST_F(QueueTest, FindWithPredicate)
+{
+  int first = 10;
+  int second = 20;
+  int third = 30;
+
+  enqueue(q, &first);
+  enqueue(q, &second);
+  enqueue(q, &third);
+
+  int* found = (int*)find(q, isGreaterThan15);
+
+  ASSERT_NE(found, nullptr);
+  EXPECT_EQ(*found, 20);  // Should find 20, which is the first value > 15
+}
