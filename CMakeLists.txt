@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.16.0)
 
 project(GenericQueue)
 
+# Disable gtest installation
+set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+
 add_subdirectory(external)
 
 file(GLOB_RECURSE Queue_Header "include/*.h")
@@ -18,3 +21,10 @@ target_link_libraries(example PRIVATE genericQueue)
 # Unit tests
 enable_testing()
 add_subdirectory(tests)
+
+# Installation rules
+install(TARGETS genericQueue
+    ARCHIVE DESTINATION lib)
+
+install(FILES include/queue.h
+    DESTINATION include)
