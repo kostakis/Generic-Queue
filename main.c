@@ -70,6 +70,16 @@ int main()
   }
   printf("Size of queue is %zd\n", getSize(q));
 
+  Foo last = {10, 100, 1000};
+  enqueue(q, &last);
+
+  Foo* findLastElement = (Foo*)findMem(q, &last);
+  if(findLastElement == NULL)
+  {
+    fprintf(stderr, "findMem returned NULL should not happen");
+    return -1;
+  }
+
   printf("Reserving queue\n");
   reverse(q);
 

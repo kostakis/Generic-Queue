@@ -26,8 +26,10 @@ extern "C"
   queue *enqueue(queue *q, void *data);
 
   /**
+   * @brief Removes and saves into the data parameter the
+   * first element (head) of the queue. Decreases size by 1.
    * @param q The queue
-   * @param deletedElem The element deleted
+   * @param deletedElem Where to save the deleted element
    * @return queue on success, NULL on error
    */
   queue *dequeue(queue *q, void *data);
@@ -90,6 +92,24 @@ extern "C"
    * @return The new queue, NULL on error
    */
   queue *copyQueue(queue *src);
+
+  /**
+   * @brief Find the first element that matches the predicate using predicate
+   *
+   * @param q The queue
+   * @param predicate Function that returns true for matching element
+   * @return Pointer to the found element's data, NULL if not found or on error
+   */
+  void *find(queue *q, bool (*predicate)(void *data));
+
+  /**
+   * @brief Find an element in the queue by doing memory comporasion using memcmp
+   *
+   * @param q The queue
+   * @param data The data to search for
+   * @return Pointer to the found element's data, NULL if not found or on error
+   */
+  void *findMem(queue *q, void *data);
 
 #ifdef __cplusplus
 }

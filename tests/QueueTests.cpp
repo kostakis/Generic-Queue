@@ -151,3 +151,75 @@ TEST_F(QueueTest, ClearManyElements)
 
   EXPECT_TRUE(front(q, some_data) == NULL);
 }
+
+TEST_F(QueueTest, FindMemElementExists)
+{
+  int first = 10;
+  int second = 20;
+  int third = 30;
+
+  enqueue(q, &first);
+  enqueue(q, &second);
+  enqueue(q, &third);
+
+  int searchFor = 20;
+  int* found = (int*)findMem(q, &searchFor);
+
+  ASSERT_NE(found, nullptr);
+  EXPECT_EQ(*found, 20);
+}
+
+TEST_F(QueueTest, FindMemElementNotExists)
+{
+  int first = 10;
+  int second = 20;
+
+  enqueue(q, &first);
+  enqueue(q, &second);
+
+  int searchFor = 999;
+  int* found = (int*)findMem(q, &searchFor);
+
+  EXPECT_EQ(found, nullptr);
+}
+
+TEST_F(QueueTest, FindMemLastElement)
+{
+  int first = 10;
+  int second = 20;
+  int third = 30;
+
+  enqueue(q, &first);
+  enqueue(q, &second);
+  enqueue(q, &third);
+
+  int searchFor = 30;
+  int* found = (int*)findMem(q, &searchFor);
+
+  ASSERT_NE(found, nullptr);
+  EXPECT_EQ(*found, 30);
+}
+
+TEST_F(QueueTest, FindMemWithStruct)
+{
+  queue* structQueue = createQueue(sizeof(foo));
+
+  foo first = {1, 2, 3, 4};
+  foo second = {5, 6, 7, 8};
+  foo third = {9, 10, 11, 12};
+
+  enqueue(structQueue, &first);
+  enqueue(structQueue, &second);
+  enqueue(structQueue, &third);
+
+  foo searchFor = {5, 6, 7, 8};
+  foo* found = (foo*)findMem(structQueue, &searchFor);
+
+  ASSERT_NE(found, nullptr);
+  EXPECT_EQ(found->a, 5);
+  EXPECT_EQ(found->b, 6);
+  EXPECT_EQ(found->c, 7);
+  EXPECT_EQ(found->d, 8);
+
+  destroyQueue(&structQueue);
+}

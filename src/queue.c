@@ -228,3 +228,55 @@ void destroyQueue(queue **q)
   free(*q);
   *q = NULL;
 }
+
+void *find(queue *q, bool (*predicate)(void *data))
+{
+  if(q == NULL || q->size == 0)
+  {
+    return NULL;
+  }
+
+  if(predicate == NULL)
+  {
+    return NULL;
+  }
+
+  node *current = q->head;
+
+  while(current != NULL)
+  {
+    if(predicate(current->data))
+    {
+      return current->data;
+    }
+
+    current = current->next;
+  }
+
+  return NULL;
+}
+
+void *findMem(queue *q, void *data)
+{
+  if(q == NULL || data == NULL)
+  {
+    return NULL;
+  }
+
+  if(q->size == 0)
+  {
+    return NULL;
+  }
+
+  node *current = q->head;
+  while(current != NULL)
+  {
+    if(memcmp(current->data, data, q->allocationSize) == 0)
+    {
+      return current->data;
+    }
+    current = current->next;
+  }
+
+  return NULL;
+}
