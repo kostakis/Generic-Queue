@@ -43,7 +43,7 @@ extern "C"
   queue *front(queue *q, void *data);
 
   /**
-   * @brieft Reverse the queue
+   * @brief Reverse the queue
    * @param The queue
    * @return q, NULL on error
    */
