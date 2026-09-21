@@ -16,6 +16,13 @@ A lightweight generic queue implementation in C. This library provides a complet
 
 ## Building
 
+In both Linux and Windows `compile_commands.json` can be generated to improve intelisense and LSP servers.
+```bash
+cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+ln -s build/compile_commands.json compile_commands.json # link/move to the root directory
+```
+
+
 ### Linux
 
 ```bash

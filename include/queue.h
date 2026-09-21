@@ -103,7 +103,7 @@ extern "C"
   void *find(queue *q, bool (*predicate)(void *data));
 
   /**
-   * @brief Find an element in the queue by doing memory comporasion using memcmp
+   * @brief Find an element in the queue by doing memory comparsion using memcmp
    *
    * @param q The queue
    * @param data The data to search for
