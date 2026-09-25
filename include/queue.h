@@ -59,6 +59,7 @@ extern "C"
   /**
    * @brief Destroy the queue
    * This will clear, destroy and free all memory of the queue.
+   * If q is null (not initialized) the method just returns
    * @param q Pointer to the queue
    */
   void destroyQueue(queue **q);
@@ -109,7 +110,7 @@ extern "C"
    * @param data The data to search for
    * @return Pointer to the found element's data, NULL if not found or on error
    */
-  void *findMem(queue *q, void *data);
+  void *findMem(queue *q, const void *data);
 
 #ifdef __cplusplus
 }

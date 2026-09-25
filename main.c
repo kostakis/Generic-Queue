@@ -23,7 +23,7 @@ void printQueue(queue *q)
   printf("-----------------\n");
 }
 
-// Driver code to test the generic queue library
+// Driver/Client code to test the generic queue library
 int main()
 {
   queue *q = createQueue(sizeof(Foo));

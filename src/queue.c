@@ -256,7 +256,7 @@ void *find(queue *q, bool (*predicate)(void *data))
   return NULL;
 }
 
-void *findMem(queue *q, void *data)
+void *findMem(queue *q, const void *data)
 {
   if(q == NULL || data == NULL)
   {
