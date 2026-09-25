@@ -224,6 +224,20 @@ TEST_F(QueueTest, FindMemWithStruct)
   destroyQueue(&structQueue);
 }
 
+TEST_F(QueueTest, FindMemWrongMemorySize)
+{
+  queue* structQueue = createQueue(sizeof(foo));
+  foo first = {1, 2, 3, 4};
+
+  enqueue(structQueue, &first);
+
+  int someInt = -1;
+
+  void* found = findMem(q, &someInt);
+
+  EXPECT_EQ(found, nullptr);
+}
+
 // Predicate function for testing find
 static bool isGreaterThan15(void *data)
 {
