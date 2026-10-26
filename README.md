@@ -107,29 +107,6 @@ cmake --install . --config Release
 ```  
 You need to configure then your project or cmake file to link using that location
 
-## API
-
-- `queue *createQueue(size_t allocSize)` - Create a new queue
-- `void destroyQueue(queue **q)` - Destroy queue and free memory
-- `queue *enqueue(queue *q, void *data)` - Add element to back
-- `queue *dequeue(queue *q, void *data)` - Remove and retrieve front element
-- `queue *front(queue *q, void *data)` - Peek at front element
-- `queue *reverse(queue *q)` - Reverse the queue order
-- `queue *clearQueue(queue *q)` - Remove all elements
-- `queue *copyQueue(queue *src)` - Create a deep copy
-- `void *find(queue *q, bool (*predicate)(void *data))` - Find element with predicate
-- `void *findMem(queue *q, void *data)` - Find element by memory comparison
-- `size_t getSize(queue *q)` - Get number of elements
-- `bool isEmpty(queue *q)` - Check if queue is empty
-- `size_t getAllocationSize(queue *q)` - Get element size
-- `SerializeResult serializeQueueToNewBuffer(queue *q, void **buffer, size_t *bufferSize)` - Serialize queue to newly allocated buffer
-- `SerializeResult serializeQueueToBuffer(queue *q, void *buffer, size_t bufferSize)` - Serialize queue to existing buffer
-- `SerializeResult deserializeQueueFromBuffer(void *buffer, size_t bufferSize, queue **result)` - Deserialize queue from buffer
-- `SerializeResult serializeQueueToFile(queue *q, const char *filename)` - Serialize queue to file
-- `SerializeResult deserializeQueueFromFile(const char *filename, queue **result)` - Deserialize queue from file
-
-See `queue.h` for detailed documentation.
-
 ## Usage Example (with Serialization)
 
 ```c
