@@ -1,6 +1,8 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#include "SerializeResult.h"
+
 #include <stdbool.h> //For true
 #include <stdio.h>
 #include <stdlib.h>
@@ -111,6 +113,52 @@ extern "C"
    * @return Pointer to the found element's data, NULL if not found or on error
    */
   void *findMem(queue *q, const void *data);
+
+  /**
+   * @brief Serialize queue to a newly allocated buffer
+   * @param q The queue to serialize
+   * @param buffer Output buffer - Allocation will be done internally by the library
+   * @param bufferSize Size of the allocated buffer
+   * @return SERIALIZE_SUCCESS on success, error code on failure.
+   * @note Deallocation of the buffer must be done by the client side
+   */
+  SerializeResult serializeQueueToNewBuffer(queue *q, void **buffer, size_t *bufferSize);
+
+  /**
+   * @brief Serialize queue to an existing buffer
+   * @param q The queue to serialize
+   * @param buffer Pre-allocated buffer
+   * @param bufferSize Size of the provided buffer
+   * @return SERIALIZE_SUCCESS on success, error code on failure
+   */
+  SerializeResult serializeQueueToBuffer(queue *q, void *buffer, size_t bufferSize);
+
+  /**
+   * @brief Deserialize queue from buffer
+   * @param buffer Buffer containing serialized queue data
+   * @param bufferSize Size of the buffer
+   * @param result Output queue (allocated by function)
+   * @return SERIALIZE_SUCCESS on success, error code on failure
+   * @note Queue/Result deallocation must be done by the client side
+   */
+  SerializeResult deserializeQueueFromBuffer(void *buffer, size_t bufferSize, queue **result);
+
+  /**
+   * @brief Serialize queue to file
+   * @param q The queue to serialize
+   * @param filename Path to the file
+   * @return SERIALIZE_SUCCESS on success, error code on failure
+   */
+  SerializeResult serializeQueueToFile(queue *q, const char *filename);
+
+  /**
+   * @brief Deserialize queue from file
+   * @param filename Path to the file
+   * @param result The created queue from the buffer.
+   * @return SERIALIZE_SUCCESS on success, error code on failure
+   */
+  SerializeResult deserializeQueueFromFile(const char *filename, queue **result);
+
 
 #ifdef __cplusplus
 }

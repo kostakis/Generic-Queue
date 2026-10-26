@@ -13,6 +13,7 @@ A lightweight generic queue implementation in C. This library provides a complet
 - Queue reversal and copy operations
 - Comprehensive error handling
 - Zero dependencies for library users
+- Serialization to/from buffers and files
 
 ## Building
 
@@ -121,14 +122,20 @@ You need to configure then your project or cmake file to link using that locatio
 - `size_t getSize(queue *q)` - Get number of elements
 - `bool isEmpty(queue *q)` - Check if queue is empty
 - `size_t getAllocationSize(queue *q)` - Get element size
+- `SerializeResult serializeQueueToNewBuffer(queue *q, void **buffer, size_t *bufferSize)` - Serialize queue to newly allocated buffer
+- `SerializeResult serializeQueueToBuffer(queue *q, void *buffer, size_t bufferSize)` - Serialize queue to existing buffer
+- `SerializeResult deserializeQueueFromBuffer(void *buffer, size_t bufferSize, queue **result)` - Deserialize queue from buffer
+- `SerializeResult serializeQueueToFile(queue *q, const char *filename)` - Serialize queue to file
+- `SerializeResult deserializeQueueFromFile(const char *filename, queue **result)` - Deserialize queue from file
 
 See `queue.h` for detailed documentation.
 
-## Usage Example
+## Usage Example (with Serialization)
 
 ```c
 #include "queue.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct {
     int id;
@@ -146,26 +153,59 @@ int main() {
     // Add elements
     Person p1 = {1, "Alice"};
     Person p2 = {2, "Bob"};
+    Person p3 = {3, "Charlie"};
 
     enqueue(q, &p1);
     enqueue(q, &p2);
+    enqueue(q, &p3);
 
     printf("Queue size: %zu\n", getSize(q));
 
-    // Peek at front
+    // Demonstrate serialization - save queue to file
+    SerializeResult result = serializeQueueToFile(q, "people_queue.dat");
+    if (result != SERIALIZE_SUCCESS) {
+        fprintf(stderr, "Serialization failed: %d\n", result);
+        destroyQueue(&q);
+        return 1;
+    }
+    printf("Queue serialized to file successfully\n");
+
+    // Peek at front element
     Person front_person;
     front(q, &front_person);
-    printf("Front: %s\n", front_person.name);
+    printf("Front: %s (ID: %d)\n", front_person.name, front_person.id);
 
-    // Remove elements
+    // Remove some elements
     Person dequeued;
-    while (!isEmpty(q)) {
-        dequeue(q, &dequeued);
-        printf("Dequeued: %s\n", dequeued.name);
+    dequeue(q, &dequeued);
+    printf("Dequeued: %s (ID: %d)\n", dequeued.name, dequeued.id);
+
+    dequeue(q, &dequeued);
+    printf("Dequeued: %s (ID: %d)\n", dequeued.name, dequeued.id);
+
+    printf("Queue size after dequeuing: %zu\n", getSize(q));
+
+    // Now demonstrate deserialization - restore queue from file
+    destroyQueue(&q);  // Clean up original queue
+    
+    queue *restored_queue;
+    result = deserializeQueueFromFile("people_queue.dat", &restored_queue);
+    if (result != SERIALIZE_SUCCESS) {
+        fprintf(stderr, "Deserialization failed: %d\n", result);
+        return 1;
+    }
+    printf("Queue deserialized from file successfully\n");
+    printf("Restored queue size: %zu\n", getSize(restored_queue));
+
+    // Process all elements from restored queue
+    while (!isEmpty(restored_queue)) {
+        dequeue(restored_queue, &dequeued);
+        printf("Dequeued: %s (ID: %d)\n", dequeued.name, dequeued.id);
     }
 
     // Clean up
-    destroyQueue(&q);
+    destroyQueue(&restored_queue);
+    remove("people_queue.dat");  // Clean up file
     return 0;
 }
 ```

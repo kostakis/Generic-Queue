@@ -1,3 +1,4 @@
+#include "SerializeResult.h"
 #include "queue.h"
 
 #include <stdio.h>
@@ -70,6 +71,39 @@ int main()
   }
   printf("Size of queue is %zd\n", getSize(q));
 
+  void *myBuffer = NULL;
+  size_t bufferSize = 0;
+
+  SerializeResult result = serializeQueueToNewBuffer(q, &myBuffer, &bufferSize);
+  if (result == SERIALIZE_SUCCESS) {
+      printf("Buffer size is %zu\n", bufferSize);
+
+      queue *queueFromBuffer = NULL;
+      result = deserializeQueueFromBuffer(myBuffer, bufferSize, &queueFromBuffer);
+
+      if(result == SERIALIZE_SUCCESS) {
+          printf("Queue created from buffer - Deserialized\n");
+
+          // Peek the front element
+          Foo frontElem;
+          if(front(queueFromBuffer, &frontElem) == NULL)
+          {
+            fprintf(stderr, "Cant get front element\n");
+            return -1;
+          }
+          printf("Deserialized queue front element is %d\n", frontElem.a);
+
+          destroyQueue(&queueFromBuffer);
+
+      }
+
+      if (myBuffer != NULL) {
+          free(myBuffer);
+      }
+  } else {
+      printf("Serialization failed with error code: %d\n", result);
+  }
+
   Foo last = {10, 100, 1000};
   enqueue(q, &last);
 
@@ -77,6 +111,7 @@ int main()
   if(findLastElement == NULL)
   {
     fprintf(stderr, "findMem returned NULL should not happen");
+    destroyQueue(&q);
     return -1;
   }
 
